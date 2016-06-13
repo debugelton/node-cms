@@ -1,0 +1,28 @@
+version: "2"
+services:
+  www:
+    build: ./www
+    ports:
+     - "3000:3000"
+    volumes:
+     - ./www/src:/usr/src/www/src
+    depends_on:
+     - mongo
+    links:
+     - mongo
+  cms:
+    build: ./cms
+    ports:
+     - "5000:5000"
+    volumes:
+     - ./cms/src:/usr/src/cms/src
+    volumes_from:
+     - www
+    depends_on:
+     - mongo
+    links:
+     - mongo
+  mongo:
+    image: mongo
+#    ports:
+#     - "27017:27017"

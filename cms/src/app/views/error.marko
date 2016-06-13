@@ -1,0 +1,11 @@
+<html lang="en">
+    <head>
+        <title>${data.title}</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1>${data.message}</h1>
+        <h2 if(data.error.status)>${data.error.status}</h2>
+        <pre if(data.error.stack)>${data.error.stack}</pre>
+    </body>
+</html>

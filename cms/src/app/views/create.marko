@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Marko Templating Engine</title>
+    </head>
+    <body>
+        <h1>
+            Hello ${data.title}!! Tamtaram
+        </h1>
+ 
+        <ul if(notEmpty(data.articles))>
+            <li for(article in data.articles)>
+                <p>${article.title}</p>
+            </li>
+        </ul>
+        <div else>
+            No colors!
+        </div>
+    </body>
+</html>

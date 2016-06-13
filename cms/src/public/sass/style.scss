@@ -1,0 +1,27 @@
+@import "../components/bootstrap-4.0.0/scss/bootstrap";
+@import "mixins";
+@import "../components/fonts/iconmon/style";
+
+@include font-face("League Gothic", '../components/fonts/theleagueof-league-gothic/leaguegothic-italic-webfont', 500, normal, eot woff);
+
+@font-face {
+    font-family: 'icomoon';
+    src:    url('../components/fonts/iconmoon/icomoon.eot?ifp79t');
+    src:    url('../components/fonts/iconmoon/icomoon.eot?ifp79t#iefix') format('embedded-opentype'),
+        url('../components/fonts/iconmoon/icomoon.ttf?ifp79t') format('truetype'),
+        url('../components/fonts/iconmoon/icomoon.woff?ifp79t') format('woff'),
+        url('../components/fonts/iconmoon/icomoon.svg?ifp79t#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1 {
+    font-family: "League Gothic";
+}
+
+.main-navi {
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+}
