@@ -37,6 +37,7 @@ module.exports = function (grunt) {
         files: [
           'src/app.js',
           'src/app/**/*.js',
+          '!src/app/**/*.marko.js',
           'src/config/*.js'
         ],
         tasks: ['develop', 'delayed-livereload']
@@ -83,7 +84,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'sass',
-    'develop',
     'watch'
   ]);
 };

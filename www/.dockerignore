@@ -1,7 +1,5 @@
 ./node_modules
 ./.editorconfig
-./.bowerrc
 ./.gitignore
 ./Dockerfile
 ./Gruntfile.js
-./bower.json

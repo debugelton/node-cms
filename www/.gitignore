@@ -1,2 +1,4 @@
 node_modules/
 .sass-cache
+*.marko.js
+src/app/public/css/style.css
