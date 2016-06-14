@@ -8,7 +8,11 @@ module.exports = function (grunt) {
   // load all grunt tasks
   require('load-grunt-tasks')(grunt);
 
-  var reloadPort = 35730, files;
+  var liveReload = {
+      port: 35731,
+      host: '127.19.0.4'
+  };
+  var files;
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -27,7 +31,7 @@ module.exports = function (grunt) {
     watch: {
       options: {
         nospawn: true,
-        livereload: false/*reloadPort*/
+        livereload: liveReload
       },
       js: {
         files: [
@@ -43,18 +47,18 @@ module.exports = function (grunt) {
         ],
         tasks: ['sass'],
         options: {
-          livereload: reloadPort
+          livereload: liveReload
         }
-      },
-      views: {
-        files: [
-          'src/app/views/*.marko',
-          'src/app/views/**/*.marko'
-          //'src/app/views/*.marko.js',
-          //'src/app/views/**/*.marko.js'
-        ],
-        options: { livereload: false/*reloadPort*/ }
       }
+      // views: {
+      //   files: [
+      //     'src/app/views/*.marko',
+      //     'src/app/views/**/*.marko'
+      //   ],
+      //   options: {
+      //     livereload: liveReload
+      //   }
+      // }
     }
   });
 
@@ -63,9 +67,10 @@ module.exports = function (grunt) {
   files = grunt.file.expand(files);
 
   grunt.registerTask('delayed-livereload', 'Live reload after the node server has restarted.', function () {
+    console.log('http://' + liveReload.host + ':' + liveReload.port + '/changed?files=' + files.join(','));
     var done = this.async();
     setTimeout(function () {
-      request.get('http://localhost:' + reloadPort + '/changed?files=' + files.join(','),  function(err, res) {
+      request.get('http://' + liveReload.host + ':' + liveReload.port + '/changed?files=' + files.join(','),  function(err, res) {
           var reloaded = !err && res.statusCode === 200;
           if (reloaded)
             grunt.log.ok('Delayed live reload successful.');

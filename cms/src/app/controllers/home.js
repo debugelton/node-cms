@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
     var templatePath = require.resolve('../views/index.marko');
     var template     = require('marko').load(templatePath);
 
-    template.render({
+    template.stream({
       title: 'CMS Manager'
-    }, res);
+    }).pipe(res);
 });

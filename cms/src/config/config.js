@@ -5,6 +5,7 @@ var path = require('path'),
 var config = {
   development: {
     root: rootPath,
+    viewPath: rootPath + '/app/views',
     app: {
       name: 'app'
     },
@@ -14,6 +15,7 @@ var config = {
 
   test: {
     root: rootPath,
+    viewPath: rootPath + '/app/views',
     app: {
       name: 'app'
     },
@@ -23,6 +25,7 @@ var config = {
 
   production: {
     root: rootPath,
+    viewPath: rootPath + '/app/views',
     app: {
       name: 'app'
     },

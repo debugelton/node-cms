@@ -11,15 +11,14 @@ var methodOverride = require('method-override');
 
 require('marko/express'); //enable res.marko 
 require('marko/node-require').install();
-require('marko/hot-reload').enable();
 
 module.exports = function(app, config) {
   var env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
   
-  app.set('views', config.root + '/app/views');
-  app.set('view engine', 'marko');
+  // app.set('views', config.root + '/app/views');
+  // app.set('view engine', 'marko');
 
   app.use(favicon(config.root + '/public/favicons/favicon.ico'));
   app.use(logger('dev'));
@@ -44,9 +43,10 @@ module.exports = function(app, config) {
   });
   
   if(app.get('env') === 'development'){
-    var templatePath = require.resolve('../app/views/error.marko');
-    var template     = require('marko').load(templatePath);
+
     app.use(function (err, req, res, next) {
+      var templatePath = require.resolve('../app/views/error.marko');
+      var template     = require('marko').load(templatePath);
       res.status(err.status || 500);
       template.render({
         message: err.message,
@@ -54,6 +54,20 @@ module.exports = function(app, config) {
         title: 'error'
       }, req);
     });
+
+    require('marko/hot-reload').enable();
+    require('fs').watch(config.viewPath, function (event, filename) {
+        if (/\.marko$/.test(filename)) {
+            // Resolve the filename to a full template path:
+            var templatePath = require("path").join(config.viewPath, filename);
+
+            console.log('Marko template modified: ', templatePath);
+
+            // Pass along the *full* template path to marko
+            require('marko/hot-reload').handleFileModified(templatePath);
+        }
+    });
+
   }
 
   app.use(function (err, req, res, next) {
