@@ -8,8 +8,9 @@ module.exports = function (app) {
 };
 
 router.get('/create', function (req, res, next) {
-    var templatePath = require.resolve('../views/create.marko');
-    var template     = require('marko').load(templatePath);
+    var viewPath         = req.app.get('views');
+    var resolvedTemplate = require.resolve(viewPath + '/create.marko');
+    var template         = require('marko').load(resolvedTemplate);
     Article.find(function (err, articles) {
         if (err) return next(err);
         template.render({

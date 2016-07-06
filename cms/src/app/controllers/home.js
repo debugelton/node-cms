@@ -8,8 +8,9 @@ module.exports = function (app) {
 };
 
 router.get('/', function (req, res, next) {
-    var templatePath = require.resolve('../views/index.marko');
-    var template     = require('marko').load(templatePath);
+    var viewPath         = req.app.get('views');
+    var resolvedTemplate = require.resolve(viewPath + '/index.marko');
+    var template         = require('marko').load(resolvedTemplate);
 
     template.stream({
       title: 'CMS Manager'

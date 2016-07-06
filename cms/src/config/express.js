@@ -9,15 +9,15 @@ var compress = require('compression');
 var methodOverride = require('method-override');
 
 
-require('marko/express'); //enable res.marko 
+require('marko/express'); //enable res.marko
 require('marko/node-require').install();
 
 module.exports = function(app, config) {
   var env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
-  
-  // app.set('views', config.root + '/app/views');
+
+  app.set('views', config.viewPath);
   // app.set('view engine', 'marko');
 
   app.use(favicon(config.root + '/public/favicons/favicon.ico'));
@@ -41,7 +41,7 @@ module.exports = function(app, config) {
     err.status = 404;
     next(err);
   });
-  
+
   if(app.get('env') === 'development'){
 
     app.use(function (err, req, res, next) {

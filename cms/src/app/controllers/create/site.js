@@ -13,9 +13,9 @@ router.get('/create/site', function (req, res, next) {
         url   : '#',
         text  : 'title text blibla blub fallerie fallera holahopsasa und so weiter und so fort'
     });
-console.log ("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-    var templatePath = require.resolve('../../views/create/site.marko');
-    var template     = require('marko').load(templatePath);
+    var viewPath         = req.app.get('views');
+    var resolvedTemplate = require.resolve(viewPath + '/create/site.marko');
+    var template         = require('marko').load(resolvedTemplate);
     // article.save(function (err, data) {
     //     if (err) console.log(err);
     //     else console.log('Saved : ', data );
