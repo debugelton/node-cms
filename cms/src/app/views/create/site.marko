@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>${data.title}</title>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <script src="/js/jquery-3.0.0.js" />
+    </head>
+    <body>
+        <div class="content">
+            <div class="page-wrapper container">
+                <div class="row">
+                    <h1 class="col-xs-12 display-2">${data.title}</h1>
+                    <p class="col-xs-12">Welcome sdsd to ${data.title}</p>
+                    <ul if(notEmpty(data.articles))>
+                        <li for(article in data.articles)>
+                            <p>${article.title}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
