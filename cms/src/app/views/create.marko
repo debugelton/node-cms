@@ -7,17 +7,16 @@
         <script src="/js/jquery-3.0.0.js" />
     </head>
     <body>
-        <div class="content">
+        <div class="page-wrapper content">
             <div class="page-wrapper container">
                 <div class="row">
                     <h1 class="col-xs-12 display-2">${data.title}</h1>
- 
+                    <include(data.includes.main_menu)/>
                     <ul if(notEmpty(data.articles))>
                         <li for(article in data.articles)>
                             <p>${article.title}</p>
                         </li>
                     </ul>
-                    <include(data.includes.main_menu)/>
                 </div>
             </div>
         </div>

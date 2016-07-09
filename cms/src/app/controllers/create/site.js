@@ -17,7 +17,7 @@ router.get('/create/site', function (req, res, next) {
     Article.find(function (err, articles) {
         if (err) return next(err);
         template.render({
-            title: 'CMS Create Site',
+            title: 'CMS Home',
             articles: articles,
             includes: {
                 main_menu: require(req.app.get('views') + "/components/link.main-menu.marko")
