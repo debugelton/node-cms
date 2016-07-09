@@ -40,7 +40,7 @@ module.exports = function (grunt) {
           '!src/app/**/*.marko.js',
           'src/config/*.js'
         ],
-        tasks: ['develop'/*, 'delayed-livereload'*/]
+        tasks: [/*'develop', 'delayed-livereload'*/]
       },
       css: {
         files: [

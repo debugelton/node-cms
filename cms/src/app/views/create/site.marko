@@ -12,11 +12,7 @@
                 <div class="row">
                     <h1 class="col-xs-12 display-2">${data.title}</h1>
                     <p class="col-xs-12">Welcome sdsd to ${data.title}</p>
-                    <ul if(notEmpty(data.articles))>
-                        <li for(article in data.articles)>
-                            <p>${article.title}</p>
-                        </li>
-                    </ul>
+                    <include(data.includes.main_menu)/>
                 </div>
             </div>
         </div>

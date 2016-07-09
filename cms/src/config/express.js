@@ -1,3 +1,4 @@
+require('marko/node-require').install();
 var express = require('express');
 var glob = require('glob');
 
@@ -10,7 +11,6 @@ var methodOverride = require('method-override');
 
 
 require('marko/express'); //enable res.marko
-require('marko/node-require').install();
 
 module.exports = function(app, config) {
   var env = process.env.NODE_ENV || 'development';
@@ -54,17 +54,19 @@ module.exports = function(app, config) {
         title: 'error'
       }, req);
     });
-
+    // require('marko/browser-refresh').enable();
     require('marko/hot-reload').enable();
-    require('fs').watch(config.viewPath, function (event, filename) {
+    require('node-watch')(config.viewPath, function (filename) {
         if (/\.marko$/.test(filename)) {
+      console.log("node-watch: " + filename);
             // Resolve the filename to a full template path:
-            var templatePath = require("path").join(config.viewPath, filename);
+            var templatePath = require("path").join(filename);
 
             console.log('Marko template modified: ', templatePath);
 
             // Pass along the *full* template path to marko
             require('marko/hot-reload').handleFileModified(templatePath);
+
         }
     });
 

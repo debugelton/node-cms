@@ -8,23 +8,20 @@ module.exports = function (app) {
 };
 
 router.get('/create/site', function (req, res, next) {
-    var article = new Article({
-        title : 'bli bla blub',
-        url   : '#',
-        text  : 'title text blibla blub fallerie fallera holahopsasa und so weiter und so fort'
-    });
-    var viewPath         = req.app.get('views');
-    var resolvedTemplate = require.resolve(viewPath + '/create/site.marko');
-    var template         = require('marko').load(resolvedTemplate);
-    // article.save(function (err, data) {
-    //     if (err) console.log(err);
-    //     else console.log('Saved : ', data );
+    var template = require(req.app.get('views') + '/create/site.marko');
+    // var article  = new Article({
+    //     title : 'bli bla blub',
+    //     url   : '#',
+    //     text  : 'title text blibla blub fallerie fallera holahopsasa und so weiter und so fort'
     // });
     Article.find(function (err, articles) {
         if (err) return next(err);
         template.render({
             title: 'CMS Create Site',
-            articles: articles
+            articles: articles,
+            includes: {
+                main_menu: require(req.app.get('views') + "/components/link.main-menu.marko")
+            }
         }, res);
     });
 });
