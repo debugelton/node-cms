@@ -1,3 +1,4 @@
+'use strict';
 require('marko/node-require').install();
 var express        = require('express');
 var glob           = require('glob');

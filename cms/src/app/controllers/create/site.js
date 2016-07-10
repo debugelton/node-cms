@@ -7,6 +7,11 @@ module.exports = function (app) {
   app.use('/', router);
 };
 
+'use strict';
+var utils = {
+    form: require('../../../lib/controller/form')
+};
+
 router.get('/create/site', function (req, res, next) {
     var templatePath = req.app.get('views');
     var template = require(templatePath + '/create/site.marko');
@@ -26,10 +31,16 @@ router.get('/create/site', function (req, res, next) {
 
 router.post('/create/site', function (req, res, next) {
     var params = req.body;
-    var site  = new Site({
-        title : params.title,
-        route   : params.route
-    });
-    site.save();
+    var site = {};
+    var required = [{'route': 'string'}, {'title': 'string'}];
+    utils.form.is_required
+    if (utils.form.is_required(required, params).length === 0) {
+        site = new Site({
+            title : params.title,
+            route   : params.route
+        });
+        site.save();
+    }
     res.redirect('/create/site');
+
 });
