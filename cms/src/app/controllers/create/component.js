@@ -14,7 +14,8 @@ router.get('/create/component', function (req, res, next) {
     template.stream({
       title: 'CMS Manager Create Component',
       includes: {
-        main_menu: require(viewPath + '/components/link.main-menu.marko')
+        main_menu: require(viewPath + '/components/link.main-menu.marko'),
+        header: require(req.app.get('views') + "/components/header/header.marko")
       }
     }).pipe(res);
 });

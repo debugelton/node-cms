@@ -8,7 +8,8 @@ module.exports = function (app) {
 };
 
 router.get('/create/site', function (req, res, next) {
-    var template = require(req.app.get('views') + '/create/site.marko');
+    var templatePath = req.app.get('views');
+    var template = require(templatePath + '/create/site.marko');
     // var article  = new Article({
     //     title : 'bli bla blub',
     //     url   : '#',
@@ -20,8 +21,26 @@ router.get('/create/site', function (req, res, next) {
             title: 'CMS Home',
             articles: articles,
             includes: {
-                main_menu: require(req.app.get('views') + "/components/link.main-menu.marko")
+                main_menu: require(templatePath + "/components/link.main-menu.marko"),
+                header: require(templatePath + "/components/header/header.marko")
             }
         }, res);
     });
+});
+
+
+router.post('/create/site', function (req, res, next) {
+    var templatePath = req.app.get('views');
+    var template = require(templatePath + '/create/site.marko');
+    var params = req.body;
+    template.render({
+        title: 'CMS Home',
+        params: params,
+        includes: {
+            main_menu: require(templatePath + "/components/link.main-menu.marko"),
+            header: require(templatePath + "/components/header/header.marko")
+        }
+    }, res);
+
+    // req.redirect(302, '/create/site');
 });

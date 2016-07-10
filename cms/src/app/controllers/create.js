@@ -17,7 +17,8 @@ router.get('/create', function (req, res, next) {
             title: 'CMS Manager',
             articles: articles,
             includes: {
-                main_menu: require(req.app.get('views') + "/components/link.main-menu.marko")
+                main_menu: require(req.app.get('views') + "/components/link.main-menu.marko"),
+                header: require(req.app.get('views') + "/components/header/header.marko")
             }
         }, res);
     });

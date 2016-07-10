@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>${data.title}</title>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="/css/style.css" />
-        <script src="/js/jquery-3.0.0.js" />
+        <include(data.includes.header)/>
     </head>
     <body>
         <div class="content">
@@ -13,6 +10,27 @@
                     <h1 class="col-xs-12 display-2">${data.title}</h1>
                     <include(data.includes.main_menu)/>
                     <p class="col-xs-12">Welcome sdsd to ${data.title}</p>
+                </div>
+                <div class="row">
+                    <form class="col-xs-12" method="post" action="">
+                        <div class="form-group row">
+                            <label class="col-xs-12 col-md-4 form-control-label" for="title">Seiten-Titel</label>
+                            <div class="col-xs-12 col-md-8">
+                                <input type="text" class="form-control" id="title" name="title" value=(data.params && data.params.title) placeholder="Seiten Titel">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-xs-12 col-md-4 form-control-label" for="route">Route</label>
+                            <div class="col-xs-12 col-md-8">
+                                <input type="text" class="form-control" id="route" name="route" value=(data.params && data.params.route) placeholder="z.B. /blog">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-secondary">Speichern</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
