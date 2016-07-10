@@ -2,6 +2,7 @@ var express      = require('express');
 var router       = express.Router();
 var mongoose     = require('mongoose');
 var Article      = mongoose.model('Article');
+var Site      = mongoose.model('Site');
 
 module.exports = function (app) {
   app.use('/', router);
@@ -10,16 +11,16 @@ module.exports = function (app) {
 router.get('/create/site', function (req, res, next) {
     var templatePath = req.app.get('views');
     var template = require(templatePath + '/create/site.marko');
-    // var article  = new Article({
+    // var site  = new Site({
     //     title : 'bli bla blub',
     //     url   : '#',
     //     text  : 'title text blibla blub fallerie fallera holahopsasa und so weiter und so fort'
     // });
-    Article.find(function (err, articles) {
+    Site.find(function (err, sites) {
         if (err) return next(err);
         template.render({
             title: 'CMS Home',
-            articles: articles,
+            sites: sites,
             includes: {
                 main_menu: require(templatePath + "/components/link.main-menu.marko"),
                 header: require(templatePath + "/components/header/header.marko")
@@ -33,6 +34,11 @@ router.post('/create/site', function (req, res, next) {
     var templatePath = req.app.get('views');
     var template = require(templatePath + '/create/site.marko');
     var params = req.body;
+    var site  = new Site({
+        title : params.title,
+        route   : params.route
+    });
+    site.save();
     template.render({
         title: 'CMS Home',
         params: params,
