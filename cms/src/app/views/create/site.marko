@@ -11,12 +11,6 @@
                     <include(data.includes.main_menu)/>
                     <p class="col-xs-12">Welcome sdsd to ${data.title}</p>
                 </div>
-                <ul class="row" if(notEmpty(data.sites))>
-                    <li class="col-xs-12" for(site in data.sites)>
-                        <p>${site.title}</p>
-                        <p>${site.route}</p>
-                    </li>
-                </ul>
                 <div class="row">
                     <form class="col-xs-12" method="post" action="">
                         <div class="form-group row">
@@ -38,6 +32,12 @@
                         </div>
                     </form>
                 </div>
+                <ul class="row" if(notEmpty(data.sites))>
+                    <li class="col-xs-12" for(site in data.sites)>
+                        <p>${site.title}</p>
+                        <p>${site.route}</p>
+                    </li>
+                </ul>
             </div>
         </div>
     </body>
