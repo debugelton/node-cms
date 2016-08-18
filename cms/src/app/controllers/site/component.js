@@ -8,9 +8,9 @@ module.exports = function (app) {
   app.use('/', router);
 };
 
-router.get('/create/component', function (req, res, next) {
+router.get('/site/component', function (req, res, next) {
     var viewPath         = req.app.get('views');
-    var template         = require(viewPath + '/create/component.marko');
+    var template         = require(viewPath + '/site/component.marko');
 
     template.stream({
       title: 'CMS Manager Create Component',

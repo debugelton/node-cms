@@ -13,9 +13,9 @@ module.exports = function (app) {
 };
 
 
-router.get('/create/site', function (req, res, next) {
+router.get('/site/create', function (req, res, next) {
     var templatePath = req.app.get('views');
-    var template = require(templatePath + '/create/site.marko');
+    var template = require(templatePath + '/site/site.marko');
     Site.find(function (err, sites) {
         if (err) return next(err);
         template.render({
@@ -29,26 +29,36 @@ router.get('/create/site', function (req, res, next) {
     });
 });
 
-
-router.post('/create/site', function (req, res, next) {
-    var params = req.body;
-    var site = {};
+router.post('/site/create', function (req, res, next) {
+    var params   = req.body;
+    var dataPath = "../www/src/app";
+    var fileName = params.route.split("/").pop();
     var required = [{'route': 'string'}, {'title': 'string'}];
+    var error    = [];
+    var site     = new Site({
+        title : params.title,
+        route : params.route
+    });
 
     if (utils.form.is_required(required, params).length === 0) {
-        site = new Site({
-            title : params.title,
-            route   : params.route
-        });
-        site.save();
-        var dataPath = "../www/src/app";
-        var fileName = params.route.split("/").pop();
-        
 
         fs.mkdir(dataPath + "/controllers" + params.route, function (err) {
             fs.writeFile(dataPath + "/controllers" + params.route + "/" + fileName, '', function (err) {
-              if (err) throw err;
-              console.log('It\'s saved!');
+                if (err) throw err;
+                site.save(function (error) {
+                    if (error) {
+                        if (error.code == 11000) { // Error 11000: duplicate key error collection: app-development.sites index
+                            console.log("error in mongoose");
+                        }
+                        res.redirect('/site/create/error/' + error.code);
+                    }
+                    else {
+                        console.log("redirect mongoose succes save");
+                        res.redirect('/site/create');
+                    }
+                    
+                });
+
             });
         });
 
@@ -70,6 +80,9 @@ router.post('/create/site', function (req, res, next) {
             // view.end();
         });
     }
-    res.redirect('/create/site');
+    else {
+
+        res.redirect('/site/create');
+    }
 
 });

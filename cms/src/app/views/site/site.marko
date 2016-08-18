@@ -34,9 +34,14 @@
                 </div>
                 <ul class="row" if(notEmpty(data.sites))>
                     <li class="col-xs-12" for(site in data.sites)>
-                        <p>${site.title}</p>
-                        <p>${site.route}</p>
-                    </li>
+                        <div class="row">
+                            <p class="col-xs-12 col-sm-4">${site.title}</p>
+                            <p class="col-xs-12 col-sm-4">${site.route}</p>
+                            <div class="col-xs-12 col-sm-4">
+                                <a type="submit" href="/site/delete?route=${site.route}">Delete</a>
+                            </div>
+                        </div>
+                    </li>   
                 </ul>
             </div>
         </div>

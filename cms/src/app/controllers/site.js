@@ -8,7 +8,7 @@ module.exports = function (app) {
   app.use('/', router);
 };
 
-router.get('/create', function (req, res, next) {
+router.get('/site', function (req, res, next) {
     var template = require(req.app.get('views') + '/create.marko');
     Article.find(function (err, articles) {
         if (err) return next(err);
